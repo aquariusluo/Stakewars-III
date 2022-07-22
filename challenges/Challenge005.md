@@ -337,12 +337,6 @@ near call stakewar3pool.factory.shardnet.near update_reward_fee_fraction '{"rewa
 **You have now configure your Staking pool.**
 
 Check your pool is now visible on https://explorer.shardnet.near.org/nodes/validators    
-Or, Check via command below, If you see the screenshot, you're good to be validator producting blocks.
-```
-journalctl -n 1000 -f -u neard
-```
-![image](https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-9.png)
-
 
 ### Transactions Guide
 #### Deposit and Stake NEAR
@@ -418,7 +412,18 @@ near call <staking_pool_id> resume_staking '{}' --accountId <accountId>
 ```
 
 ## Setup tools for monitoring node status
+#### Log Files
+The log file is stored either in the ~/.nearup/logs directory or in systemd depending on your setup.
 
+Systemd Command:
+```
+journalctl -n 100 -f -u neard | ccze -A
+```
+![image](https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-9.png)
+* **Validator**: A “Validator” will indicate you are an active validator
+* **73 validators**: Total 100 validators on the network
+* **30 peers**: You current have 30 peers. You need at least 3 peers to reach consensus and start validating
+* **#1149563**: block – Look to ensure blocks are moving
 
 ## AWS EC2 pricing per month
 The price of EC2 instance c5.xlarge is $146 per month in N.V US.
