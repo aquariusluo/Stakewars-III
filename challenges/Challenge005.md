@@ -8,7 +8,7 @@
 
 * [Create your Shardnet wallet](#create-your-shardnet-wallet)
     - [Input a wallet name](#input-a-wallet-name)
-    - [Save the secure passphrase](#save-the-secure-passphrase)
+    - [Save secure passphrase](#save-secure-passphrase)
     - [Verify passphrase](#verify-passphrase)
 * [Setup a validator and sync it to the actual state of the network](#setup-a-validator-and-sync-it-to-the-actual-state-of-the-network)
     - [Create AWS EC2 instance with princing](#create-aws-ec2-instance-with-princing)
@@ -27,7 +27,7 @@ Access to https://wallet.shardnet.near.org/create and input account ID: `mywalle
     <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-0.png" width="500"/><img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-1.png" width="400"/>
 </figure>
 
-### Save the secure passphrase
+### Save secure passphrase
 <figure class="third">
     <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-2.png" width="400"/><img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-3.png" width="400"/>
 </figure>
@@ -250,7 +250,7 @@ cp ~/.near-credentials/shardnet/YOUR_WALLET.json ~/.near/validator_key.json
 cp ~/.near-credentials/shardnet/mywallet0.shardnet.near.json ~/.near/validator_key.json
 vi ~/.near/validator_key.json
 ```
-> Edit “account_id” => mywallet0.factory.shardnet.near   
+> Edit “account_id” => stakewar3pool.factory.shardnet.near   
 > Change private_key to secret_key
 
 ```
@@ -287,6 +287,7 @@ WantedBy=multi-user.target
 Enable autoexecution and start service
 ```
 sudo chmod 755 /etc/systemd/system/neard.service
+sudo systemctl daemon-reload
 sudo systemctl enable neard
 sudo systemctl start neard
 ```
