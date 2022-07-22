@@ -34,9 +34,9 @@ Please save 12 passphase words safely, which will be used to restore your accoun
 </figure>
 Return to main wallet UI.   
 <figure class="third">
-    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-6.png" width="400"/>
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-7.png" width="400"/>
 </figure>
-Now, You have a new shardnet wallet with 500 faucets. which named "mywallet0.shardnet.near"
+Now, You have a new shardnet wallet with 560 faucets. which named "mywallet0.shardnet.near"
 
 ## Setup a validator and sync it to the actual state of the network
 ## Deploy a new staking pool for your validator
