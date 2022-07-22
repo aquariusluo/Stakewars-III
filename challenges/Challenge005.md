@@ -11,7 +11,7 @@
     - [Save secure passphrase](#save-secure-passphrase)
     - [Verify passphrase](#verify-passphrase)
 * [Setup a validator and sync it to the actual state of the network](#setup-a-validator-and-sync-it-to-the-actual-state-of-the-network)
-    - [Create AWS EC2 instance with princing](#create-aws-ec2-instance-with-princing)
+    - [Create AWS EC2 instance](#create-aws-ec2-instance)
     - [Setup ubuntu desktop](#setup-ubuntu-desktop)
     - [Setup environment](setup-environment)
     - [Authorize wallet locally](#authorize-wallet-locally)
@@ -20,6 +20,7 @@
     - [Useful links](#useful-links)
     - [Deploy a Staking Pool Contract](#deploy-a-staking-pool-contract)
     - [Transactions Guide](#transactions-guide)
+* [AWS EC2 pricing per month](#aws-ec2-pricing-per-month)
 * [Setup tools for monitoring node status](#setup-tools-for-monitoring-node-status)
 
 
@@ -48,7 +49,7 @@ Now, You have a wallet named "mywallet0.shardnet.near" with 560 faucets.
 
 ## Setup a validator and sync it to the actual state of the network
 *_This section is focused on deploying a node (nearcore), downloading a snapshot, syncing it to the actual state of the network._*  
-### Create AWS EC2 instance with princing
+### Create AWS EC2 instance
 Access to AWS console https://aws.amazon.com/console/ and create C5.xlarge instance. The price per month is $146 in N.V US.  
         
 C5.xlarge | Spec           
@@ -336,7 +337,13 @@ near call stakewar3pool.factory.shardnet.near update_reward_fee_fraction '{"rewa
 ```
 **You have now configure your Staking pool.**
 
-Check your pool is now visible on https://explorer.shardnet.near.org/nodes/validators
+Check your pool is now visible on https://explorer.shardnet.near.org/nodes/validators    
+Or, Check via command below, If you see the screenshot, you're good to be validator producting blocks.
+```
+journalctl -n 1000 -f -u neard
+```
+![image](https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-9.png)
+
 
 ### Transactions Guide
 #### Deposit and Stake NEAR
@@ -410,6 +417,15 @@ Command:
 ```
 near call <staking_pool_id> resume_staking '{}' --accountId <accountId>
 ```
+
+## AWS EC2 pricing per month
+
+EC2       | Storgae   | Sum
+---------:|----------:|-------
+ c5.xlarge| 200 G SSD |
+ $126.48  | $20       |$146.48
+
+ 
 ## Setup tools for monitoring node status
 
 ## Update log
