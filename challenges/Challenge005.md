@@ -21,6 +21,8 @@
     - [Deploy a Staking Pool Contract](#deploy-a-staking-pool-contract)
     - [Transactions Guide](#transactions-guide)
 * [Setup tools for monitoring node status](#setup-tools-for-monitoring-node-status)
+    - [Log Files](#log-files)
+    - [Common Commands](#common-commands)
 * [AWS EC2 pricing per month](#aws-ec2-pricing-per-month)
 
 
@@ -412,7 +414,7 @@ near call <staking_pool_id> resume_staking '{}' --accountId <accountId>
 ```
 
 ## Setup tools for monitoring node status
-#### Log Files
+### Log Files
 The log file is stored either in the ~/.nearup/logs directory or in systemd depending on your setup.
 
 Systemd Command:
@@ -424,6 +426,32 @@ journalctl -n 100 -f -u neard | ccze -A
 * **73 validators**: Total 100 validators on the network
 * **30 peers**: You current have 30 peers. You need at least 3 peers to reach consensus and start validating
 * **#1149563**: block – Look to ensure blocks are moving
+
+Command:
+```
+sudo apt install curl jq
+```
+### Common Commands
+#### Check your node version:
+Command:
+```
+curl -s http://127.0.0.1:3030/status | jq .version
+```
+#### Check Delegators and Stake
+Command:
+```
+near view <your pool>.factory.shardnet.near get_accounts '{"from_index": 0, "limit": 10}' --accountId <accountId>.shardnet.near
+```
+#### Check Reason Validator Kicked
+Command:
+```
+curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' 127.0.0.1:3030 | jq -c '.result.prev_epoch_kickout[] | select(.account_id | contains ("<POOL_ID>"))' | jq .reason
+```
+#### Check Blocks Produced / Expected
+Command:
+```
+curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' 127.0.0.1:3030 | jq -c '.result.current_validators[] | select(.account_id | contains ("POOL_ID"))'
+```
 
 ## AWS EC2 pricing per month
 The price of EC2 instance c5.xlarge is $146 per month in N.V US.
