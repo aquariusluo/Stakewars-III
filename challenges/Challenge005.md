@@ -20,8 +20,8 @@
     - [Useful links](#useful-links)
     - [Deploy a Staking Pool Contract](#deploy-a-staking-pool-contract)
     - [Transactions Guide](#transactions-guide)
-* [AWS EC2 pricing per month](#aws-ec2-pricing-per-month)
 * [Setup tools for monitoring node status](#setup-tools-for-monitoring-node-status)
+* [AWS EC2 pricing per month](#aws-ec2-pricing-per-month)
 
 
 ## Create your Shardnet wallet  
@@ -417,8 +417,11 @@ Command:
 near call <staking_pool_id> resume_staking '{}' --accountId <accountId>
 ```
 
+## Setup tools for monitoring node status
+
+
 ## AWS EC2 pricing per month
-The price of EC2 instance C5.xlarge is $146 per month in N.V US.
+The price of EC2 instance c5.xlarge is $146 per month in N.V US.
 
 EC2       | Storage   | Sum
 ---------:|----------:|-------
@@ -426,7 +429,5 @@ EC2       | Storage   | Sum
  $126     | $20       |$146
 
  
-## Setup tools for monitoring node status
-
 ## Update log
 Updated 2022-07-22:Creation
