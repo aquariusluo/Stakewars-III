@@ -6,22 +6,41 @@
 💡 __This is a step-by-step guide on how to mount a node validator for Stake Wars III challenge 005.__     
 
 
-* [1-Create your Shardnet wallet](#1-create-your-shardnet-wallet)
-* [2-Setup a validator and sync it to the actual state of the network](#2-setup-a-validator-and-sync-it-to-the-actual-state-of-the-network)
-* [3-Deploy a new staking pool for your validator](#3-deploy-a-new-staking-pool-for-your-validator)
-* [4-Setup tools for monitoring node status](#4-setup-tools-for-monitoring-node-status)
+* [Create your Shardnet wallet](#create-your-shardnet-wallet)
+    - [Input a wallet name](#input-a-wallet-name)
+    - [Save the secure passphrase](#save-the-secure-passphrase)
+    - [Verify passphrase](#verify-passphrase)
+* [Setup a validator and sync it to the actual state of the network](#setup-a-validator-and-sync-it-to-the-actual-state-of-the-network)
+* [Deploy a new staking pool for your validator](#deploy-a-new-staking-pool-for-your-validator)
+* [Setup tools for monitoring node status](#setup-tools-for-monitoring-node-status)
 
 
-## 1-Create your Shardnet wallet
-**Please access to https://wallet.shardnet.near.org/create**   
+## Create your Shardnet wallet  
+### Input a wallet name
+Access to https://wallet.shardnet.near.org/create and input account ID: `mywallet0` 
+<figure class="third">
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-0.png" width="500"/><img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-1.png" width="400"/>
+</figure>
 
-## 2-Setup a validator and sync it to the actual state of the network
+### Save the secure passphrase
+<figure class="third">
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-2.png" width="400"/><img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-3.png" width="400"/>
+</figure>
+Please save 12 passphase words safely, which will be used to restore your account.    
 
-## 3-Verify passphrase
+### Verify passphrase
+<figure class="third">
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-4.png" width="400"/><img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-5.png" width="400"/>
+</figure>
+Return to main wallet UI.   
+<figure class="third">
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-6.png" width="400"/>
+</figure>
+Now, You have a new shardnet wallet with 500 faucets. which named "mywallet0.shardnet.near"
 
-## 4-Setup tools for monitoring node status
-
-Now, You have a new shardnet wallet with 2000 faucets. which named "mywallet0.shardnet.near"
+## Setup a validator and sync it to the actual state of the network
+## Deploy a new staking pool for your validator
+## Setup tools for monitoring node status
 
 ## Update log
 Updated 2022-07-22:Creation
