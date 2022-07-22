@@ -417,7 +417,7 @@ The log file is stored either in the ~/.nearup/logs directory or in systemd depe
 
 Systemd Command:
 ```
-journalctl -n 100 -f -u neard | ccze -A
+journalctl -n 100 -f -u neard
 ```
 ![image](https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-9.png)
 * **Validator**: A “Validator” will indicate you are an active validator
