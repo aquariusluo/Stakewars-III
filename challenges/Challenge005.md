@@ -50,15 +50,14 @@ Now, You have a wallet named "mywallet0.shardnet.near" with 560 faucets.
 ## Setup a validator and sync it to the actual state of the network
 *_This section is focused on deploying a node (nearcore), downloading a snapshot, syncing it to the actual state of the network._*  
 ### Create AWS EC2 instance
-Access to AWS console https://aws.amazon.com/console/ and create C5.xlarge instance. The price per month is $146 in N.V US.  
+Access to AWS console https://aws.amazon.com/console/ and create C5.xlarge instance.  
         
 C5.xlarge | Spec           
 ----------:|------------
 CPU      |  4 Core
 Memory   |  8 G 
 SSD      |  200 G
-OS       |  Ubuntu 20.04
-Price    |  $146           
+OS       |  Ubuntu 20.04        
 
 <center class="half">
     <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-1.png" width="1000"/>
@@ -419,11 +418,12 @@ near call <staking_pool_id> resume_staking '{}' --accountId <accountId>
 ```
 
 ## AWS EC2 pricing per month
+The price of EC2 instance C5.xlarge is $146 per month in N.V US.
 
 EC2       | Storage   | Sum
 ---------:|----------:|-------
  c5.xlarge| 200 G SSD |
- $126.48  | $20       |$146.48
+ $126     | $20       |$146
 
  
 ## Setup tools for monitoring node status
