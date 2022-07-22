@@ -12,6 +12,7 @@
     - [Verify passphrase](#verify-passphrase)
 * [Setup a validator and sync it to the actual state of the network](#setup-a-validator-and-sync-it-to-the-actual-state-of-the-network)
     - [Create an EC2 instance on AWS](#create-an-EC2-instance-on-aws)
+    - [Setup ubuntu desktop](#setup-ubuntu-desktop)
 * [Deploy a new staking pool for your validator](#deploy-a-new-staking-pool-for-your-validator)
 * [Setup tools for monitoring node status](#setup-tools-for-monitoring-node-status)
 
@@ -52,7 +53,15 @@ SSD      |  200 G
 OS       |  Ubuntu 20.04
 Price    |  $146           
 
-![image](https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-1.png)
+<center class="half">
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-1.png" width="1000"/>
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-2.png" width="800"/>
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-3.png" width="800"/>
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-4.png" width="800"/>
+    <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-5.png" width="800"/>
+</center>
+
+### Setup ubuntu desktop
 
 ## Deploy a new staking pool for your validator
 ## Setup tools for monitoring node status
