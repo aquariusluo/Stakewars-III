@@ -15,6 +15,7 @@
     - [Setup ubuntu desktop](#setup-ubuntu-desktop)
     - [Setup environment](setup-environment)
     - [Authorize wallet locally](#authorize-wallet-locally)
+    - [Activate the node as validator](#activate-the-node-as-validator)
 * [Deploy a new staking pool for your validator](#deploy-a-new-staking-pool-for-your-validator)
 * [Setup tools for monitoring node status](#setup-tools-for-monitoring-node-status)
 
@@ -159,6 +160,140 @@ ls ~/.near-credentials/shardnet
 ```
 > mywallet0.shardnet.near.json
 
+### Activate the node as validator
+* Confirm that your machine has the right CPU features
+```bash
+lscpu | grep -P '(?=.*avx )(?=.*sse4.2 )(?=.*cx16 )(?=.*popcnt )' > /dev/null \
+  && echo "Supported" \
+  || echo "Not supported"
+```
+> Supported
+* Install developer tools:
+```
+sudo apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm cargo
+```
+* Install Python pip:
+```
+sudo apt install python3-pip
+```
+* Set the configuration:
+```
+USER_BASE_BIN=$(python3 -m site --user-base)/bin
+export PATH="$USER_BASE_BIN:$PATH"
+```
+* Install Building env
+```
+sudo apt install clang build-essential make
+```
+* Install Rust & Cargo
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+![image](https://github.com/near/stakewars-iii/raw/main/challenges/images/rust.png)    
+
+Press 1 and press enter.
+Source the environment
+```
+source $HOME/.cargo/env
+```
+* Clone nearcore project from GitHub
+First, clone the nearcore [repository](https://github.com/near/nearcore) .
+```
+git clone https://github.com/near/nearcore
+cd nearcore
+git fetch
+```
+Checkout to the commit needed. Please refer to the commit defined in [this file](https://github.com/near/stakewars-iii/blob/main/commit.md) .
+```
+git checkout <commit>
+```
+Compile nearcore binary
+In the nearcore folder run the following commands:
+```
+cargo build -p neard --release --features shardnet
+```
+> The binary path is target/release/neard.  
+
+Initialize working directory
+```
+./target/release/neard --home ~/.near init --chain-id shardnet --download-genesis
+```
+> This command will create the directory of *~/.near* and will generate config.json, node_key.json, and genesis.json  
+
+Replace the config.json
+```
+rm ~/.near/config.json
+wget -O ~/.near/config.json https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/config.json
+```
+* Get latest snapshot
+Install AWS Cli  
+```
+sudo apt-get install awscli -y
+```
+Download snapshot (genesis.json)   
+```
+cd ~/.near
+wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/genesis.json
+```
+If the above fails, AWS CLI may be oudated in your distribution repository. Instead, try:
+```
+pip3 install awscli --upgrade
+```
+* Generate the validator_key.json by __near generate-key <pool_id>__   
+For example: Set <pool_id> as _stakewar3pool.factory.shardnet.near_
+```
+near generate-key stakewar3pool.factory.shardnet.near
+```
+* Copy the file generated to shardnet folder: Make sure to replace <pool_id> by your accountId.   
+cp ~/.near-credentials/shardnet/YOUR_WALLET.json ~/.near/validator_key.json
+```
+cp ~/.near-credentials/shardnet/mywallet0.shardnet.near.json ~/.near/validator_key.json
+vi ~/.near/validator_key.json
+```
+> Edit “account_id” => mywallet0.factory.shardnet.near   
+> Change private_key to secret_key
+
+```
+{
+  "account_id": "stakewar3pool.factory.shardnet.near",
+  "public_key": "ed25519:5ZHEUwpHYFHQ88CNh1TPcZ1LcwaHaSSsBLWwRaGhi3AF",
+  "secret_key": "ed25519:****"
+}
+```
+* Setup Systemd Command:   
+```
+sudo vi /etc/systemd/system/neard.service
+```
+Paste:   
+```
+[Unit]
+Description=NEARd Daemon Service
+
+[Service]
+Type=simple
+User=stakewar3
+#Group=near
+WorkingDirectory=/home/stakewar3/.near
+ExecStart=/home/stakewar3/nearcore/target/release/neard run
+Restart=on-failure
+RestartSec=30
+KillSignal=SIGINT
+TimeoutStopSec=45
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+```
+Enable autoexecution and start service
+```
+sudo chmod 755 /etc/systemd/system/neard.service
+sudo systemctl enable neard
+sudo systemctl start neard
+```
+Watch logs:   
+```
+journalctl -n 100 -f -u neard
+```  
 
 ## Deploy a new staking pool for your validator
 ## Setup tools for monitoring node status
