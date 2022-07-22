@@ -5,6 +5,9 @@
 
 💡 __This is a step-by-step guide on how to mount a node validator for Stake Wars III challenge 005.__     
 
+__Useful links__     
+Wallet: https://wallet.shardnet.near.org/     
+Explorer: https://explorer.shardnet.near.org/ 
 
 * [Create your Shardnet wallet](#create-your-shardnet-wallet)
     - [Input a wallet name](#input-a-wallet-name)
@@ -17,7 +20,6 @@
     - [Authorize wallet locally](#authorize-wallet-locally)
     - [Activate the node as validator](#activate-the-node-as-validator)
 * [Deploy a new staking pool for your validator](#deploy-a-new-staking-pool-for-your-validator)
-    - [Useful links](#useful-links)
     - [Deploy a Staking Pool Contract](#deploy-a-staking-pool-contract)
     - [Transactions Guide](#transactions-guide)
 * [Setup tools for monitoring node status](#setup-tools-for-monitoring-node-status)
@@ -303,10 +305,6 @@ journalctl -n 100 -f -u neard
 
 ## Deploy a new staking pool for your validator
 _Deploy a new staking pool for your validator. Do operations on your staking pool to delegate and stake NEAR._     
-
-### Useful links
-Wallet: https://wallet.shardnet.near.org/     
-Explorer: https://explorer.shardnet.near.org/ 
 
 ### Deploy a Staking Pool Contract
 Calls the staking pool factory, creates a new staking pool with the specified name, and deploys it to the indicated accountId.   
