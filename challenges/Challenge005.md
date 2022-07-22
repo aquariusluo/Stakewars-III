@@ -11,6 +11,7 @@
     - [Save the secure passphrase](#save-the-secure-passphrase)
     - [Verify passphrase](#verify-passphrase)
 * [Setup a validator and sync it to the actual state of the network](#setup-a-validator-and-sync-it-to-the-actual-state-of-the-network)
+    - [Create an EC2 instance on AWS](#create-an-EC2-instance-on-aws)
 * [Deploy a new staking pool for your validator](#deploy-a-new-staking-pool-for-your-validator)
 * [Setup tools for monitoring node status](#setup-tools-for-monitoring-node-status)
 
@@ -36,9 +37,23 @@ Return to main wallet UI.
 <figure class="third">
     <img src="https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/wallet-7.png" width="400"/>
 </figure>
-Now, You have a new shardnet wallet with 560 faucets. which named "mywallet0.shardnet.near"
+Now, You have a wallet named "mywallet0.shardnet.near" with 560 faucets.
 
 ## Setup a validator and sync it to the actual state of the network
+*_This section is focused on deploying a node (nearcore), downloading a snapshot, syncing it to the actual state of the network._*  
+### Create an EC2 instance on AWS
+Access to AWS console https://aws.amazon.com/console/ and create C5.xlarge instance. The price per month is $146 in N.V US.  
+        
+C5.xlarge | Spec           
+----------:|------------
+CPU      |  4 Core
+Memory   |  8 G 
+SSD      |  200 G
+OS       |  Ubuntu 20.04
+Price    |  $146           
+
+![image](https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/val-1.png)
+
 ## Deploy a new staking pool for your validator
 ## Setup tools for monitoring node status
 
