@@ -5,10 +5,6 @@
 
 💡 __This is a step-by-step guide on how to mount a node validator for Stake Wars III challenge 005.__     
 
-__Useful links__     
-Wallet: https://wallet.shardnet.near.org/     
-Explorer: https://explorer.shardnet.near.org/ 
-
 * [Create your Shardnet wallet](#create-your-shardnet-wallet)
     - [Input a wallet name](#input-a-wallet-name)
     - [Save secure passphrase](#save-secure-passphrase)
@@ -26,6 +22,10 @@ Explorer: https://explorer.shardnet.near.org/
     - [Log Files](#log-files)
     - [Common Commands](#common-commands)
 * [AWS EC2 pricing per month](#aws-ec2-pricing-per-month)
+
+__Useful links__     
+Wallet: https://wallet.shardnet.near.org/       
+Explorer: https://explorer.shardnet.near.org/   
 
 
 ## Create your Shardnet wallet  
