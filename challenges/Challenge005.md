@@ -420,7 +420,7 @@ near call <staking_pool_id> resume_staking '{}' --accountId <accountId>
 
 ## AWS EC2 pricing per month
 
-EC2       | Storgae   | Sum
+EC2       | Storage   | Sum
 ---------:|----------:|-------
  c5.xlarge| 200 G SSD |
  $126.48  | $20       |$146.48
