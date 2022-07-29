@@ -43,7 +43,8 @@ Review your logs
 ```
 cat /home/stakewar3/logs/all.log
 ```
-
+Screenshot of pool transactions
+![image](https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/images/challenge006.png)
 
 ## Update log
 
