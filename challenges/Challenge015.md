@@ -358,7 +358,28 @@ Before we can move on generating validator keys, we need first create the neard 
 ```
 nixos-rebuild switch --flake /etc/nixos#my-validator
 ```
+The first switch will take longer since it blocks on downloading the s3 data backup (around 300GB). You can follow the progress by running: `journalctl -u kuutamod -f`.   
 
+### Node keys / generating the active validator key
+Note that with kuutamod there will be one validator and node key for the active
+validator, while each validator also has its own non-validator node key, which
+is used during passive mode. The passive keys are created automatically by
+kuutamod.
+
+The next step is to generate and install the active validator key and validator
+node key.
+
+```console
+export NEAR_ENV=shardnet
+nix run github:kuutamoaps/kuutamod#near-cli generate-key viboracecata_kuutamo.factory.shardnet.near
+nix run github:kuutamoaps/kuutamod#near-cli generate-key node_key
+```
+You then must edit these files and change `private_key` to `secret_key`.
+
+```console
+nano ~/.near-credentials/shardnet/viboracecata_kuutamo.factory.shardnet.near.json
+nano ~/.near-credentials/shardnet/node_key.json
+```
 
 ## Update log
 
