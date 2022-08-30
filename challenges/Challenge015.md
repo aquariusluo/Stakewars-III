@@ -219,6 +219,62 @@ If we now stop the first validating node instance by pressing ctrl-c...
 ![img](./images/Challenge015-7.png)
 We can see that the second voting node instance takes over:
 ![img](./images/Challenge015-8.png)
+Check first node metric
+``
+curl http://localhost:2233/metrics
+kuutamod_state{type="Registering"} 0
+kuutamod_state{type="Shutdown"} 0
+kuutamod_state{type="Startup"} 0
+kuutamod_state{type="Syncing"} 0
+kuutamod_state{type="Validating"} 0
+kuutamod_state{type="Voting"} 1
+# HELP kuutamod_uptime Time in milliseconds how long daemon is running
+# TYPE kuutamod_uptime gauge
+kuutamod_uptime 28864
+``
+Check second node metric
+```
+curl http://localhost:2234/metrics
+# HELP kuutamod_neard_restarts How often neard has been restarted
+# TYPE kuutamod_neard_restarts counter
+kuutamod_neard_restarts 1
+# HELP kuutamod_state In what state our supervisor statemachine is
+# TYPE kuutamod_state gauge
+kuutamod_state{type="Registering"} 0
+kuutamod_state{type="Shutdown"} 0
+kuutamod_state{type="Startup"} 0
+kuutamod_state{type="Syncing"} 0
+kuutamod_state{type="Validating"} 1
+kuutamod_state{type="Voting"} 0
+# HELP kuutamod_uptime Time in milliseconds how long daemon is running
+# TYPE kuutamod_uptime gauge
+kuutamod_uptime 8785
+```
+Check first node validator node key
+```
+ls -la .data/near/localnet/kuutamod0
+drwxr-xr-x  3 root root 4096 Aug 30 10:24 .
+drwxr-xr-x 10 root root 4096 Aug 30 09:34 ..
+-rw-r--r--  1 root root 2253 Aug 30 10:24 config.json
+drwxr-xr-x  2 root root 4096 Aug 30 10:24 data
+-rw-r--r--  1 root root 6658 Aug 30 09:34 genesis.json
+lrwxrwxrwx  1 root root   64 Aug 30 10:24 node_key.json -> /root/kuutamod/.data/near/localnet/kuutamod0/voter_node_key.json
+-rw-------  1 root root  214 Aug 30 09:34 voter_node_key.json
+```
+Check second node validator node key
+```
+ls -la .data/near/localnet/kuutamod1
+drwxr-xr-x  3 root root 4096 Aug 30 10:24 .
+drwxr-xr-x 10 root root 4096 Aug 30 09:34 ..
+-rw-r--r--  1 root root 2253 Aug 30 10:24 config.json
+drwxr-xr-x  2 root root 4096 Aug 30 10:24 data
+-rw-r--r--  1 root root 6658 Aug 30 09:34 genesis.json
+lrwxrwxrwx  1 root root   54 Aug 30 10:24 node_key.json -> /root/kuutamod/.data/near/localnet/node3/node_key.json
+lrwxrwxrwx  1 root root   59 Aug 30 10:24 validator_key.json -> /root/kuutamod/.data/near/localnet/node3/validator_key.json
+-rw-------  1 root root  214 Aug 30 09:34 voter_node_key.json
+```
+
+Now, First valiating node is failover and switch to second voting node.
 
 ## Update log
 
