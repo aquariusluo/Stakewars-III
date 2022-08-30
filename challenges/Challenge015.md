@@ -213,6 +213,13 @@ lrwxrwxrwx  1 root root   64 Aug 30 09:57 node_key.json -> /root/kuutamod/.data/
 -rw-------  1 root root  214 Aug 30 09:34 voter_node_key.json
 ```
 
+### Experiment of failover
+To see if first validating node is offline, the second voting node could take over validating.     
+If we now stop the first validating node instance by pressing ctrl-c...
+![img](./images/Challenge015-7.png)
+We can see that the second voting node instance takes over:
+![img](./images/Challenge015-8.png)
+
 ## Update log
 
 Updated 2022-08-30
