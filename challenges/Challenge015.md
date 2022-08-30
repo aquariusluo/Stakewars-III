@@ -274,7 +274,7 @@ lrwxrwxrwx  1 root root   59 Aug 30 10:24 validator_key.json -> /root/kuutamod/.
 -rw-------  1 root root  214 Aug 30 09:34 voter_node_key.json
 ```
 
-Now, First valiating node is failover and switch to second voting node on localnet.
+Now, First valiadting node is failover and switch to second voting node on localnet.
 
 ## 2. Deploy kuutamod on a testnet
 
