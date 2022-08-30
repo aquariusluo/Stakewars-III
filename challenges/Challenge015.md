@@ -409,6 +409,7 @@ kuutamod_uptime 42085
 
 Once neard is synced with the network, you should see a kuutamod listed as an active validator using `kuutamoctl active-validator`:
 ![img](./images/Challenge015-11.png)
+where name is the kuutamo node id.    
 
 journalctl -u kuutamod -f | grep "INFO stats:"
 ![img](./images/Challenge015-9.png)
