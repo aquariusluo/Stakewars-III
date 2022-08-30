@@ -108,11 +108,18 @@ Install the nix package manager (as described here), you can get all dependencie
 ```
 su root
 cd ~
+nix-env -i git
 git clone https://github.com/kuutamolabs/kuutamod
 cd kuutamod
 nix develop
 ```
+![img](./images/Challenge015-3.png)
 
+#### After running nix develop or installing the dependencies, run the command hivemind:
+```
+hivemind
+```
+![img](./images/Challenge015-4.png)
 
 ## Update log
 
