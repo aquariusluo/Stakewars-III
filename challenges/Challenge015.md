@@ -63,7 +63,6 @@ swapon /dev/sda2
 nixos-generate-config --root /mnt
 ```
 #### Modifiy the configuration to install NixOS
-
 nano /mnt/etc/nixos/configuration.nix
 ```
 nix.extraOptions = ''
@@ -76,6 +75,22 @@ networking.hostName = "my-validator";
 
 services.openssh.enable = true;
 ```
+#### Install NixOS
+```
+nixos-install 
+```
+#### unload image of NixOS and reboot
+
+#### Login from Hetzner console and create a user
+```
+useradd stakewar3 -d /home/stakewar3 -m
+passwd stakewar3
+chmod u+w /etc/sudoers
+nano /etc/sudoers
+    stakewar3 ALL=(ALL:ALL) SETENV: ALL
+chmod u-w /etc/sudoers
+```
+
 
 ## 2. Deploy kuutamod on a testnet
 
