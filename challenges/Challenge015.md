@@ -407,13 +407,28 @@ kuutamod_state{type="Voting"} 0
 kuutamod_uptime 42085
 ```
 
-Once neard is synced with the network, you should see a kuutamod listed as an active validator using `kuutamoctl`:
+Once neard is synced with the network, you should see a kuutamod listed as an active validator using `kuutamoctl active-validator`:
+![img](./images/Challenge015-11.png)
 
+journalctl -u kuutamod -f | grep "INFO stats:"
+![img](./images/Challenge015-9.png)
+curl http://localhost:2233/metrics
+```console
+# HELP kuutamod_neard_restarts How often neard has been restarted
+# TYPE kuutamod_neard_restarts counter
+kuutamod_neard_restarts 1
+# HELP kuutamod_state In what state our supervisor statemachine is
+# TYPE kuutamod_state gauge
+kuutamod_state{type="Registering"} 0
+kuutamod_state{type="Shutdown"} 0
+kuutamod_state{type="Startup"} 0
+kuutamod_state{type="Syncing"} 0
+kuutamod_state{type="Validating"} 1
+kuutamod_state{type="Voting"} 0
+# HELP kuutamod_uptime Time in milliseconds how long daemon is running
+# TYPE kuutamod_uptime gauge
+kuutamod_uptime 473932
 ```
-kuutamoctl active-validator
-Name: my-validator
-```
-
 
 ## Update log
 
