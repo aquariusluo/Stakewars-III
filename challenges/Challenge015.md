@@ -288,7 +288,41 @@ As above NixOS has been installed on Hetnzer VPS. A validator node for Shardnet 
 ```
 and create a `flake.nix` file in `/etc/nixos/` [More info on flakes](https://nixos.wiki/wiki/Flakes#Using_nix_flakes_with_NixOS).
 
+In your flake.nix you have to add the kuutamod flake as source and import the nixos modules from it into your configuration.nix.   
+Note: hostname is `my-validator`. and using shardnet.
+```
+{
+  inputs = {
+    # This is probably already there.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
+    # This is the line you need to add.
+    kuutamod.url = "github:kuutamolabs/kuutamod";
+  };
+  outputs = { self, nixpkgs, kuutamod }: {
+    # Replace 'my-validator' with your hostname here.
+    nixosConfigurations.my-validator = nixpkgs.lib.nixosSystem {
+      # Our neard package is currently only tested on x86_64-linux.
+      system = "x86_64-linux";
+      modules = [
+        ./configuration.nix
+
+        # Optional: This adds a our binary cache so you don't have to compile neard/kuutamod yourself.
+        # The binary cache module, won't be effective on the first run of nixos-rebuild, but you can specify it also via command line like this:
+        # $ nixos-rebuild switch --option  extra-binary-caches "https://cache.garnix.io" --option extra-trusted-public-keys "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+        self.inputs.kuutamod.nixosModules.kuutamo-binary-cache
+
+        # These are the modules provided by our flake
+        # kuutamod.nixosModules.neard-testnet
+        # or if you want to join other networks, use one of these as needed.
+        kuutamod.nixosModules.neard-shardnet
+        # kuutamod.nixosModules.neard-mainnet
+        kuutamod.nixosModules.kuutamod
+      ];
+    };
+  };
+}
+```
 ## Update log
 
 Updated 2022-08-30
