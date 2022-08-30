@@ -277,6 +277,16 @@ lrwxrwxrwx  1 root root   59 Aug 30 10:24 validator_key.json -> /root/kuutamod/.
 Now, First valiadting node is failover and switch to second voting node on localnet.
 
 ## 2. Deploy kuutamod on a testnet
+### Single node kuutamod
+As above NixOS has been installed on Hetnzer VPS. A validator node for Shardnet on kuutamod can be deployed since Flakes in NixOS has been in /etc/nixos/configuration.nix.
+```
+{
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+}
+```
+and create a `flake.nix` file in `/etc/nixos/` [More info on flakes](https://nixos.wiki/wiki/Flakes#Using_nix_flakes_with_NixOS).
 
 
 ## Update log
