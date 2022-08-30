@@ -27,7 +27,6 @@ This guide shows how to deploy kuutamod along with neard on Hetzner VPS for loca
 | CPU            | 8v AMD                                     |
 | RAM            | 16GB                                       |
 | Storage        | 240GB SSD                                  |
-| IP             | 142.132.178.12                               |
 
 #### Load ISO image of NixOS 22.05
 ![img](./images/Challenge015-1.png)
@@ -79,7 +78,7 @@ services.openssh.enable = true;
 ```
 nixos-install 
 ```
-#### unload image of NixOS and reboot
+#### Detach image of NixOS and reboot
 
 #### Login from Hetzner console and create a user
 ```
@@ -91,10 +90,28 @@ nano /etc/sudoers
 chmod u-w /etc/sudoers
 ```
 
-
 ## 2. Deploy kuutamod on a testnet
+Login user "stakewar3" via ssh tool.
+### Install requirements 
+- [consul](https://www.consul.io/): This provides a distributed lock for
+  kuutamod to detect liveness and prevent two validators from running at the
+  same time.
 
-//TODO - Description of the challenge
+- [neard](https://github.com/near/nearcore/releases/latest): Kuutamod will run this binary.
+
+- [hivemind](https://github.com/DarthSim/hivemind): This is optionally required
+  to run execute our [Procfile](../Procfile). You can also manually execute the
+  commands contained in this file.
+
+- [Python](https://www.python.org/) for some of the setup scripts.
+Install the nix package manager (as described here), you can get all dependencies by running nix develop from the source directory of kuutamod:
+```
+su root
+cd ~
+git clone https://github.com/kuutamolabs/kuutamod
+cd kuutamod
+nix develop
+```
 
 
 ## Update log
