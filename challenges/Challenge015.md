@@ -411,10 +411,10 @@ Once neard is synced with the network, you should see a kuutamod listed as an ac
 ![img](./images/Challenge015-11.png)     
 where name is the kuutamo node id.    
 
-journalctl -u kuutamod -f | grep "INFO stats:"
+`journalctl -u kuutamod -f | grep "INFO stats:"`
 ![img](./images/Challenge015-9.png)     
 
-curl http://localhost:2233/metrics
+`curl http://localhost:2233/metrics`
 ```console
 # HELP kuutamod_neard_restarts How often neard has been restarted
 # TYPE kuutamod_neard_restarts counter
