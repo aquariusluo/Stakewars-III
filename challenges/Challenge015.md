@@ -220,7 +220,7 @@ If we now stop the first validating node instance by pressing ctrl-c...
 We can see that the second voting node instance takes over:
 ![img](./images/Challenge015-8.png)
 Check first node metric
-``
+```
 curl http://localhost:2233/metrics
 kuutamod_state{type="Registering"} 0
 kuutamod_state{type="Shutdown"} 0
@@ -231,7 +231,7 @@ kuutamod_state{type="Voting"} 1
 # HELP kuutamod_uptime Time in milliseconds how long daemon is running
 # TYPE kuutamod_uptime gauge
 kuutamod_uptime 28864
-``
+```
 Check second node metric
 ```
 curl http://localhost:2234/metrics
