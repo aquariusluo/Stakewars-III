@@ -62,8 +62,20 @@ mount /dev/disk/by-label/nixos /mnt
 swapon /dev/sda2
 nixos-generate-config --root /mnt
 ```
+#### Modifiy the configuration to install NixOS
 
+nano /mnt/etc/nixos/configuration.nix
+```
+nix.extraOptions = ''
+  experimental-features = nix-command flakes
+'';
 
+boot.loader.grub.device = "/dev/sda";
+
+networking.hostName = "my-validator";
+
+services.openssh.enable = true;
+```
 
 ## 2. Deploy kuutamod on a testnet
 
