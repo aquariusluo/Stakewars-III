@@ -323,6 +323,39 @@ Note: hostname is `my-validator`. and using shardnet.
   };
 }
 ```
+
+Create a new file called `kuutamod.nix` next to your configuration.nix in `/etc/nixos/`.   
+Add the following configuration to the `/etc/nixos/kuutamod.nix` file:   
+Note: get `services.consul.interface.bind` by `ip route get 8.8.8.8`
+```
+{
+  # Consul wants to bind to a network interface. You can get your interface as follows:
+  # $ ip route get 8.8.8.8
+  # 8.8.8.8 via 172.31.1.1 dev enp1s0 src 142.132.178.12 uid 0
+  #   cache
+  # This becomes relevant when you scale up to multiple machines.
+  services.consul.interface.bind = "enp1s0";
+  services.consul.extraConfig.bootstrap_expect = 1;
+
+  # This is the URL we calculated above. Remove/comment out both if on `shardnet`:
+  # kuutamo.neard.s3.dataBackupDirectory = "s3://near-protocol-public/backups/testnet/rpc/2022-07-15T11:00:30Z";
+  # kuutamo.neard.s3.dataBackupDirectory = "s3://near-protocol-public/backups/mainnet/rpc/2022-07-15T11:00:31Z";
+
+  # We create these keys after the first 'nixos-rebuild switch'
+  # As these files are critical, we also recommend tools like https://github.com/Mic92/sops-nix or https://github.com/ryantm/agenix
+  # to securely encrypt and manage these files. For both sops-nix and agenix, set the owner to 'neard' so that the service can read it.
+  kuutamo.kuutamod.validatorKeyFile = "/var/lib/secrets/validator_key.json";
+  kuutamo.kuutamod.validatorNodeKeyFile = "/var/lib/secrets/node_key.json";
+}
+```
+Import this file in your `configuration.nix`:
+```
+{
+  imports = [ ./kuutamod.nix ];
+}
+```
+
+
 ## Update log
 
 Updated 2022-08-30
