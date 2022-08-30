@@ -355,7 +355,9 @@ Import this file in your `configuration.nix`:
 }
 ```
 Before we can move on generating validator keys, we need first create the neard user.
-```nixos-rebuild switch --flake /etc/nixos#my-validator```
+```
+nixos-rebuild switch --flake /etc/nixos#my-validator
+```
 
 
 ## Update log
