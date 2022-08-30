@@ -20,7 +20,7 @@ For support join [kuutamo-chat on Matrix.](https://matrix.to/#/#kuutamo-chat:kuu
 ## 1. Deploy kuutamod on a localnet
 This guide shows how to deploy kuutamod along with neard on Hetzner VPS for localnet. The first step is creating NixOS 22.05. and then running a localnet cluster for testing on NixOS.
 
-### 1.1 Create NixOS 22.05 on Hetzner VPS
+### Create NixOS 22.05 on Hetzner VPS
 #### CPX41 for Ubuntu20 in Falkenstein 
 | Hardware       |        Standard                            |
 | -------------- | ------------------------------------       |
