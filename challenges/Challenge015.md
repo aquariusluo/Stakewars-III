@@ -90,9 +90,9 @@ nano /etc/sudoers
 chmod u-w /etc/sudoers
 ```
 
-## 2. Deploy kuutamod on a testnet
+### Deploy kuutamod on a localnet
 Login user "stakewar3" via ssh tool.
-### Install requirements 
+#### Install requirements 
 - [consul](https://www.consul.io/): This provides a distributed lock for
   kuutamod to detect liveness and prevent two validators from running at the
   same time.
@@ -115,13 +115,13 @@ nix develop
 ```
 ![img](./images/Challenge015-3.png)
 
-### After running nix develop or installing the dependencies, run the command hivemind:
+#### After running nix develop or installing the dependencies, run the command hivemind:
 ```
 hivemind
 ```
 ![img](./images/Challenge015-4.png)
 
-### Open second ssh terminal to build and run first Near Validator Node
+#### Open second ssh terminal to build and run first Near Validator Node
 ```
 su root
 cd ~/kuutamod
@@ -137,7 +137,7 @@ nix develop
 ```
 ![img](./images/Challenge015-5.png)
 
-### Open third ssh terminal to build and run second Near Voting Node
+#### Open third ssh terminal to build and run second Near Voting Node
 ```
 su root
 cd ~/kuutamod
@@ -154,8 +154,8 @@ nix develop
 ```
 ![img](./images/Challenge015-6.png)
 
-### Open fourth ssh terminal to check Nodes status
-#### Check first validating node status
+#### Open fourth ssh terminal to check Nodes status
+##### Check first validating node status
 curl http://localhost:2233/metrics
 ```
 # HELP kuutamod_neard_restarts How often neard has been restarted
@@ -186,7 +186,7 @@ lrwxrwxrwx  1 root root   59 Aug 30 10:02 validator_key.json -> /root/kuutamod/.
 -rw-------  1 root root  214 Aug 30 09:34 voter_node_key.json
 ```
 The validator key has been symlinked and the node key has been replaced with the node key specified in -validator-node-key
-#### Check sencod voting node status
+##### Check sencod voting node status
 curl http://localhost:2234/metrics
 ```
 # HELP kuutamod_state In what state our supervisor statemachine is
@@ -213,7 +213,7 @@ lrwxrwxrwx  1 root root   64 Aug 30 09:57 node_key.json -> /root/kuutamod/.data/
 -rw-------  1 root root  214 Aug 30 09:34 voter_node_key.json
 ```
 
-### Experiment of failover
+#### Experiment of failover
 To see if first validating node is offline, the second voting node could take over validating.     
 If we now stop the first validating node instance by pressing ctrl-c...
 ![img](./images/Challenge015-7.png)
@@ -274,7 +274,10 @@ lrwxrwxrwx  1 root root   59 Aug 30 10:24 validator_key.json -> /root/kuutamod/.
 -rw-------  1 root root  214 Aug 30 09:34 voter_node_key.json
 ```
 
-Now, First valiating node is failover and switch to second voting node.
+Now, First valiating node is failover and switch to second voting node on localnet.
+
+## 2. Deploy kuutamod on a testnet
+
 
 ## Update log
 
