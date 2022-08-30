@@ -326,7 +326,7 @@ Note: hostname is `my-validator`. and using shardnet.
 
 Create a new file called `kuutamod.nix` next to your configuration.nix in `/etc/nixos/`.   
 Add the following configuration to the `/etc/nixos/kuutamod.nix` file:   
-Note: get `services.consul.interface.bind` by `ip route get 8.8.8.8`
+Note: get the value of `services.consul.interface.bind` via `ip route get 8.8.8.8`
 ```
 {
   # Consul wants to bind to a network interface. You can get your interface as follows:
@@ -354,6 +354,8 @@ Import this file in your `configuration.nix`:
   imports = [ ./kuutamod.nix ];
 }
 ```
+Before we can move on generating validator keys, we need first create the neard user.
+```nixos-rebuild switch --flake /etc/nixos#my-validator```
 
 
 ## Update log
