@@ -410,7 +410,7 @@ kuutamod_uptime 42085
 Once neard is synced with the network, you should see a kuutamod listed as an active validator using `kuutamoctl`:
 
 ```
-$ kuutamoctl active-validator
+kuutamoctl active-validator
 Name: my-validator
 ```
 
