@@ -27,10 +27,41 @@ This guide shows how to deploy kuutamod along with neard on Hetzner VPS for loca
 | CPU            | 8v AMD                                     |
 | RAM            | 16GB                                       |
 | Storage        | 240GB SSD                                  |
-| IP             | 49.12.209.74                               |
+| IP             | 142.132.178.12                               |
 
-Load ISO image of NixOS 22.05
+#### Load ISO image of NixOS 22.05
+![img](./images/Challenge015-1.png)
+poweroff then poweron
 
+#### Login from Hetzner console 
+![img](./images/Challenge015-2.png)
+#### Create password for root user
+```
+sudo passwd root
+```
+then login root user via ssh tools.
+
+#### Check system disks
+```
+lsblk
+NAME  MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0   7:0    0 792.1M  1 loop 
+sda     8:0    0 228.9G  0 disk 
+sr0    11:0    1   824M  0 rom  /iso
+```
+#### Re-creating the partition.
+```
+parted /dev/sda -- mklabel msdos
+parted /dev/sda -- mkpart primary 1MiB -8GiB
+parted /dev/sda -- mkpart primary linux-swap -8GiB 100%
+
+mkfs.ext4 -L nixos /dev/sda1
+mkswap -L swap /dev/sda2
+
+mount /dev/disk/by-label/nixos /mnt
+swapon /dev/sda2
+nixos-generate-config --root /mnt
+```
 
 
 
