@@ -436,7 +436,7 @@ kuutamod_uptime 473932
 ```
 
 ### Multi-Node kuutamo cluster
-Once your single-node kuutamod setup works, you can scale out to multiple nodes by changing your kuutamod.nix like this:
+Once your single-node kuutamod setup works, you can scale out to multiple nodes by changing your kuutamod.nix after stop kuutamod instance like this:
 ```console
 {
 
@@ -496,6 +496,17 @@ nix run github:kuutamoaps/kuutamod#near-cli generate-key viboracecata_kuutamo.fa
 nix run github:kuutamoaps/kuutamod#near-cli generate-key node_key
 nix run github:kuutamoaps/kuutamod#near-cli generate-key voter_node_key
 ```
+You then must edit these files and change `private_key` to `secret_key`.   
+
+
+Start kuutamod instance and check sync status
+```console
+systemctl start kuutamod
+
+journalctl -u kuutamod -f
+curl http://localhost:2233/metrics
+```
+
 
 ## Update log
 
