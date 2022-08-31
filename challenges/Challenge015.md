@@ -498,6 +498,8 @@ nix run github:kuutamoaps/kuutamod#near-cli generate-key voter_node_key
 ```
 You then must edit these files and change `private_key` to `secret_key`.   
 
+Do not forget to also copy `/var/lib/secrets/validator_key.json` and `/var/lib/secrets/node_key.json` from your first machine to the other nodes.
+After running `nixos-rebuild switch` on each of them.
 
 Start kuutamod instance and check sync status
 ```console
