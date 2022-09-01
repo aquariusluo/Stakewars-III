@@ -439,16 +439,8 @@ kuutamod_uptime 473932
 Once your single-node kuutamod setup works, you can scale out to multiple nodes by changing your kuutamod.nix after stop kuutamod instance like this:
 ```console
 {
-
-  # Same as above, this needs to be an interface should be used to connect to your other machines
-  # If you've come from the AWS guide, note you may need to change this.
   services.consul.interface.bind = "enp1s0";
-
-  # this now needs to be increased to the number of consul nodes your are adding
-  services.consul.extraConfig.bootstrap_expect = 3;
-
-  # We allow these ports for our consul server. Here we assume a trusted network. If this is not the case, read about
-  # setting up encryption and authentication for consul: https://www.consul.io/docs/security/encryption
+  services.consul.extraConfig.bootstrap_expect = 2;
   networking.firewall = {
     allowedTCPPorts = [
       8301 # lan serf
@@ -463,51 +455,43 @@ Once your single-node kuutamod setup works, you can scale out to multiple nodes 
       8600 # dns
     ];
   };
-
-  # add here the ip addresses or domain names of other hosts, that you want to add to the cluster
   services.consul.extraConfig.retry_join = [
-    "<IP2>"
-    "<IP3>"
+    ""167.235.248.32""
   ];
-
-  # Everything below stays the same.
-
-  # This is the URL we calculated above:
-  # kuutamo.neard.s3.dataBackupDirectory = "s3://near-protocol-public/backups/testnet/rpc/2022-07-13T11:00:40Z";
-
-  # If you set this to null, neard will download the Genesis file on first startup.
+  
   kuutamo.neard.genesisFile = null;
   kuutamo.neard.chainId = "shardnet";
-  # This is the file we just have downloaded from: https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/testnet/config.json
   kuutamo.neard.configFile = ./config.json;
 
-  # We create these keys after the first 'nixos-rebuild switch'
-  # As these files are critical, we also recommend tools like https://github.com/Mic92/sops-nix or https://github.com/ryantm/agenix
-  # to securely encrypt and manage these files. For both sops-nix and agenix, set the owner to 'neard' so that the service can read it.
   kuutamo.kuutamod.validatorKeyFile = "/var/lib/secrets/validator_key.json";
   kuutamo.kuutamod.validatorNodeKeyFile = "/var/lib/secrets/node_key.json";
 }
 ```
 
-Generate node key and validator key for other servers.
-```console
-export NEAR_ENV=shardnet
-nix run github:kuutamoaps/kuutamod#near-cli generate-key viboracecata_kuutamo.factory.shardnet.near
-nix run github:kuutamoaps/kuutamod#near-cli generate-key node_key
-nix run github:kuutamoaps/kuutamod#near-cli generate-key voter_node_key
+Note: Two nodes are deployed. Main validating node is `142.132.178.12` and voting node is `167.235.248.32`.    
+For main validating node: 
 ```
-You then must edit these files and change `private_key` to `secret_key`.   
+services.consul.extraConfig.bootstrap_expect = 2; 
+  services.consul.extraConfig.retry_join = [
+    "167.235.248.32"
+  ];
+```
+For voting node: 
+```
+services.consul.extraConfig.bootstrap_expect = 2; 
+  services.consul.extraConfig.retry_join = [
+    "142.132.178.12"
+  ];
+```
+
+Run nixos-rebuild command on each of them.   
+For main validating node: `nixos-rebuild switch --flake /etc/nixos#my-validator`    
+For voting node: `nixos-rebuild switch --flake /etc/nixos#my-voter-1`  
 
 Do not forget to also copy `/var/lib/secrets/validator_key.json` and `/var/lib/secrets/node_key.json` from your first machine to the other nodes.
 After running `nixos-rebuild switch` on each of them.
 
-Start kuutamod instance and check sync status
-```console
-systemctl start kuutamod
 
-journalctl -u kuutamod -f
-curl http://localhost:2233/metrics
-```
 
 
 ## Update log
