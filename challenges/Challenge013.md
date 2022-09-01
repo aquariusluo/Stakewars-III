@@ -85,34 +85,27 @@ cargo build -p neard --release --features shardnet
 ```
 Initialize working directory
 ```
-./target/release/neard --home ~/.near/shardnet init --chain-id shardnet --account-id=viboracecata_backup.shardnet.near --download-genesis
+./target/release/neard --home ~/.near init --chain-id shardnet --account-id=viboracecata_backup.shardnet.near --download-genesis
 ```
 Replace the config.json and genesis.json
 ```
-cd ~/.near/shardnet
+cd ~/.near
 rm ./config.json ./genesis.json
 wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/config.json
 wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/genesis.json
 ```
 
-* Generate the validator_key.json by __near generate-key <pool_id>__   
-For example: Set <pool_id> as _viboracecata_backup.factory.shardnet.near_
+* Edit the file validator_key: Make sure to replace <pool_id> by your accountId.   
 ```
-near generate-key viboracecata_backup.factory.shardnet.near
+vi ~/.near/validator_key.json
 ```
-
-* Copy the file generated to shardnet folder: Make sure to replace <pool_id> by your accountId.   
-```
-cp ~/.near-credentials/shardnet/viboracecata_backup.factory.shardnet.near.json ~/.near/shardnet/validator_key.json
-vi ~/.near/shardnet/validator_key.json
-```
-> Edit “account_id” => stakewar3pool.factory.shardnet.near   
+> Edit “account_id” => viboracecata_backup.factory.shardnet.near   
 > Change private_key to secret_key
 
 ```
 {
   "account_id": "viboracecata_backup.factory.shardnet.near",
-  "public_key": "ed25519:ExpcpiLxK737*****",
+  "public_key": "ed25519:Hr1tLo6bWT*****",
   "secret_key": "ed25519:****"
 }
 ```
@@ -130,8 +123,8 @@ Description=NEARd Daemon Service
 Type=simple
 User=stakewar3
 #Group=near
-WorkingDirectory=/home/stakewar3/.near/shardnet
-ExecStart=/home/stakewar3/nearcore/target/release/neard run --home ~/.near/shardnet
+WorkingDirectory=/home/stakewar3/.near
+ExecStart=/home/stakewar3/nearcore/target/release/neard run
 Restart=on-failure
 RestartSec=30
 KillSignal=SIGINT
