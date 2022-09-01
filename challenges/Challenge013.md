@@ -85,7 +85,7 @@ cargo build -p neard --release --features shardnet
 ```
 Initialize working directory
 ```
-./target/release/neard --home ~/.near/shardnet init --chain-id shardnet --download-genesis
+./target/release/neard --home ~/.near/shardnet init --chain-id shardnet --account-id=viboracecata_backup.shardnet.near --download-genesis
 ```
 Replace the config.json and genesis.json
 ```
@@ -131,7 +131,7 @@ Type=simple
 User=stakewar3
 #Group=near
 WorkingDirectory=/home/stakewar3/.near/shardnet
-ExecStart=/home/stakewar3/nearcore/target/release/neard run
+ExecStart=/home/stakewar3/nearcore/target/release/neard run --home ~/.near/shardnet
 Restart=on-failure
 RestartSec=30
 KillSignal=SIGINT
@@ -150,7 +150,8 @@ sudo systemctl start neard
 ```
 Watch logs:   
 ```
-journalctl -n 1000 -f -u neard
+sudo systemctl status neard
+sudo journalctl -n 1000 -f -u neard
 ```  
 
 ## 3. Migrate validator from main node to backup node
