@@ -468,7 +468,7 @@ Once your single-node kuutamod setup works, you can scale out to multiple nodes 
 }
 ```
 
-Note: Two nodes are deployed. Main validating node is `142.132.178.12` and voting node is `167.235.248.32`.    
+Note: Two nodes are deployed. Main validating node IP is `142.132.178.12` and voting node IP is `167.235.248.32`.    
 For main validating node: 
 ```
 services.consul.extraConfig.bootstrap_expect = 2; 
@@ -484,13 +484,21 @@ services.consul.extraConfig.bootstrap_expect = 2;
   ];
 ```
 
-Run nixos-rebuild command on each of them.   
+Run `nixos-rebuild` command on each of them.   
 For main validating node: `nixos-rebuild switch --flake /etc/nixos#my-validator`    
 For voting node: `nixos-rebuild switch --flake /etc/nixos#my-voter-1`  
 
 Do not forget to also copy `/var/lib/secrets/validator_key.json` and `/var/lib/secrets/node_key.json` from your first machine to the other nodes.
-After running `nixos-rebuild switch` on each of them.
 
+Now, It's time to verify if consul service is working for failover. execute `systemctl stop kuutamod` on main validating node. and see if voting node is switched to valiating status.     
+Run following commands on both nodes:
+```
+nixos-version
+journalctl -u kuutamod.service | grep 'state changed'
+systemctl status kuutamod
+```
+![img](./images/Challenge015-12.png) 
+![img](./images/Challenge015-13.png) 
 
 
 
