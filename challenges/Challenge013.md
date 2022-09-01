@@ -143,13 +143,36 @@ sudo systemctl start neard
 ```
 Watch logs:   
 ```
-sudo systemctl status neard
 sudo journalctl -n 1000 -f -u neard
 ```  
 
 ## 3. Migrate validator from main node to backup node
 
-//TODO - Description of the challenge
+Copy `node_keys.json` and `validator_keys.json` from main validator node to backup node folder `~/.near/validator_keys`.   
+
+After backup node is synced, Stopping main node by following commands:
+```
+sudo systemctl stop neard.service
+sudo systemctl disable neard.service
+sudo systemctl status neard.service
+```
+![img](./images/Challenge013-1.png)
+
+  
+Migrate validator keys from the MAIN node to the BACKUP node.  
+```
+sudo systemctl stop neard.service
+rm node_key.json validator_key.json
+cp ./validator_keys/node_key.json ./validator_keys/validator_key.json .
+cat node_key.json | grep public_key
+sudo systemctl start neard.service
+sudo journalctl -n 1000 -f -u neard | grep "INFO stats:"
+
+```
+![img](./images/Challenge013-2.png)
+
+Now, Migration from main node to backup node is succeeded.
+
 
 ## Update log
 
