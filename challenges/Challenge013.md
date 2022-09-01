@@ -101,6 +101,57 @@ For example: Set <pool_id> as _viboracecata_backup.factory.shardnet.near_
 near generate-key viboracecata_backup.factory.shardnet.near
 ```
 
+* Copy the file generated to shardnet folder: Make sure to replace <pool_id> by your accountId.   
+```
+cp ~/.near-credentials/shardnet/viboracecata_backup.factory.shardnet.near.json ~/.near/shardnet/validator_key.json
+vi ~/.near/shardnet/validator_key.json
+```
+> Edit “account_id” => stakewar3pool.factory.shardnet.near   
+> Change private_key to secret_key
+
+```
+{
+  "account_id": "viboracecata_backup.factory.shardnet.near",
+  "public_key": "ed25519:ExpcpiLxK737*****",
+  "secret_key": "ed25519:****"
+}
+```
+
+* Setup Systemd Command:   
+```
+sudo vi /etc/systemd/system/neard.service
+```
+Paste:   
+```
+[Unit]
+Description=NEARd Daemon Service
+
+[Service]
+Type=simple
+User=stakewar3
+#Group=near
+WorkingDirectory=/home/stakewar3/.near/shardnet
+ExecStart=/home/stakewar3/nearcore/target/release/neard run
+Restart=on-failure
+RestartSec=30
+KillSignal=SIGINT
+TimeoutStopSec=45
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
+```
+Enable autoexecution and start service
+```
+sudo chmod 755 /etc/systemd/system/neard.service
+sudo systemctl daemon-reload
+sudo systemctl enable neard
+sudo systemctl start neard
+```
+Watch logs:   
+```
+journalctl -n 1000 -f -u neard
+```  
 
 ## 3. Migrate validator from main node to backup node
 
