@@ -472,14 +472,14 @@ Note: Two nodes are deployed. Main validating node IP is `142.132.178.12` and vo
 For main validating node: 
 ```
 services.consul.extraConfig.bootstrap_expect = 2; 
-  services.consul.extraConfig.retry_join = [
+services.consul.extraConfig.retry_join = [
     "167.235.248.32"
   ];
 ```
 For voting node: 
 ```
 services.consul.extraConfig.bootstrap_expect = 2; 
-  services.consul.extraConfig.retry_join = [
+services.consul.extraConfig.retry_join = [
     "142.132.178.12"
   ];
 ```
@@ -501,7 +501,8 @@ curl http://localhost:8500/v1/status/leader
 "142.132.178.12:8300"
 ```
 
-Now, It's time to verify if consul service is working for failover. execute `systemctl stop kuutamod` on main validating node. and see if voting node is switched to valiating status.     
+Now, It's time to verify if consul service is working for failover. execute `systemctl stop kuutamod` on main validating node. and see if voting node is switched to valiadting status.   
+
 Run following commands on both nodes:
 ```
 nixos-version
@@ -511,7 +512,7 @@ systemctl status kuutamod
 ![img](./images/Challenge015-12.png) 
 ![img](./images/Challenge015-13.png) 
 
-
+We can see the status of voting node is validating after main node is shutdown.
 
 ## Update log
 
