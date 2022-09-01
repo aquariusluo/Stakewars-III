@@ -68,7 +68,21 @@ source $HOME/.cargo/env
 
 ## 2. Build and config backup node
 
-//TODO - Description of the challenge
+* Clone nearcore project from GitHub. First, clone the nearcore [repository](https://github.com/near/nearcore) .  
+```
+git clone https://github.com/near/nearcore
+cd nearcore
+git fetch
+```
+Checkout to the commit needed. Please refer to the commit defined in [this file](https://github.com/near/stakewars-iii/blob/main/commit.md) .
+```
+git checkout <commit>
+```
+Compile nearcore binary
+In the nearcore folder run the following commands:
+```
+cargo build -p neard --release --features shardnet
+```
 
 ## 3. Migrate validator from main node to backup node
 
