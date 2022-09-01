@@ -490,6 +490,17 @@ For voting node: `nixos-rebuild switch --flake /etc/nixos#my-voter-1`
 
 Do not forget to also copy `/var/lib/secrets/validator_key.json` and `/var/lib/secrets/node_key.json` from your first machine to the other nodes.
 
+If you access http://localhost:8500/v1/status/peers from any of the hosts, it should contain all node ips of your consul cluster:
+```
+curl http://localhost:8500/v1/status/peers
+["142.132.178.12:8300","167.235.248.32:8300"]
+```
+Furthermore http://localhost:8500/v1/status/leader should contain the consul cluster leader:
+```
+curl http://localhost:8500/v1/status/leader
+"142.132.178.12:8300"
+```
+
 Now, It's time to verify if consul service is working for failover. execute `systemctl stop kuutamod` on main validating node. and see if voting node is switched to valiating status.     
 Run following commands on both nodes:
 ```
