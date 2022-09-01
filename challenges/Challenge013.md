@@ -68,7 +68,7 @@ source $HOME/.cargo/env
 
 ## 2. Build and config backup node
 
-* Clone nearcore project from GitHub. First, clone the nearcore [repository](https://github.com/near/nearcore) .  
+Clone nearcore project from GitHub. First, clone the nearcore [repository](https://github.com/near/nearcore) .  
 ```
 git clone https://github.com/near/nearcore
 cd nearcore
@@ -83,6 +83,24 @@ In the nearcore folder run the following commands:
 ```
 cargo build -p neard --release --features shardnet
 ```
+Initialize working directory
+```
+./target/release/neard --home ~/.near/shardnet init --chain-id shardnet --download-genesis
+```
+Replace the config.json and genesis.json
+```
+cd ~/.near/shardnet
+rm ./config.json ./genesis.json
+wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/config.json
+wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/genesis.json
+```
+
+* Generate the validator_key.json by __near generate-key <pool_id>__   
+For example: Set <pool_id> as _viboracecata_backup.factory.shardnet.near_
+```
+near generate-key viboracecata_backup.factory.shardnet.near
+```
+
 
 ## 3. Migrate validator from main node to backup node
 
