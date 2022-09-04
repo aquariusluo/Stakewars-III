@@ -56,7 +56,11 @@ Check your Account Balance
 ```
 akash query bank balances --node $AKASH_NODE $AKASH_ACCOUNT_ADDRESS
 ````
-Create your Configuration for NEAR Docker named `near.yml`
+Create your Configuration for NEAR Docker named `near.yml`. but firstly generate a ssh key pair by following command:    
+```
+ssh-keygen -t rsa -f akash_docker_ssh_key -C root -b 2048
+```
+near.yml:   
 ```
 ---
 version: "2.0"
@@ -66,7 +70,7 @@ services:
     image: ubuntu:20.04
     #image: dimokus88/ubuntu:1.1
     env:
-     - 'SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeTgebUqAGlcSN9P1CTEHuyvy5Ypn5d5kxJRcNDyj4fOMt3jzD080feH5z+rKm+JxDpOeXrhaOBCZzpjeake0UdalXVqBiv4Whiv1vJ89PdRrJlewUVdimN5mx3Fs/ULeD0f40CECkldmRBWZMSqybtKiatB7SOYLWSjzA9O22HgXl0oaqNOOtJIR3oDGqjQwChyGV+WsMOAMoGcNJAFupV8z42AcleCUMbr3kCKJc2cpmb4F8UKyerD0+crNcgjVimYDtqjDAlDItCH2+VlcLUAemb9eFOirySJAqL+fDr7Cme2+/3JfudD+/RcsBxGV5h4GEDELdoo74XrBH8Cvj root'
+     - 'SSH_PUBKEY=ssh-rsa AAAAB3NzaC1*************** root'
      #- "my_root_password=#luo2020" 
      #- "link_key="
     command:
