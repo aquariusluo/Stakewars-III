@@ -190,11 +190,57 @@ unset AKASH_DSEQ AKASH_OSEQ AKASH_GSEQ
 ```
 
 
-
 ## Setup Environment for Near
+- Installing Node.js and npm      
+```
+curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -  
+sudo apt install build-essential nodejs
+PATH="$PATH"
+```
+- Install NEAR-CLI
+```
+sudo npm install -g near-cli
+```
 
+- Setup Network to "shardnet"
+```
+export NEAR_ENV=shardnet
+echo 'export NEAR_ENV=testnet' >> ~/.bashrc
+```
+
+- Activate the node as validator.       
+Install developer tools:
+```
+apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm curl tmux htop nano vim wget cargo 
+```
+
+- Clone nearcore project from GitHub First, clone the nearcore repository .
+```
+git clone https://github.com/near/nearcore
+cd nearcore
+git fetch
+git checkout 1897d5144a7068e4c0d5764d8c9180563db2fe43
+cargo build -p neard --release --features shardnet
+```
+
+- Initialize working directory.
+```
+./target/release/neard --home ~/.near init --chain-id shardnet --account-id=stakewar3_test.shardnet.near --download-genesis
+cd ~/.near
+rm config.json genesis.json
+wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/config.json
+wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/shardnet/genesis.json
+```
+
+- Syncing to latest blocks height on Shardnet
+```
+/root/nearcore/target/release/neard run
+```
+
+__Note: Systemd cannot be used in Docker. We execute `neard` in `tmux`.__ 
 
 ## Deploy Validator Pool
+Please refer to [step-by-step guide]https://github.com/crackerli/Stakewars-III/blob/master/challenges/Challenge005.md
 
 ## Update log
 Updated 2022-09-04:Creation
