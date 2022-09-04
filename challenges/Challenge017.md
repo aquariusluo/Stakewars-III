@@ -240,7 +240,7 @@ wget https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore-deploy/s
 __Note: Systemd cannot be used in Docker. We execute `neard` in `tmux`.__ 
 
 ## Deploy Validator Pool
-Please refer to [step-by-step guide]https://github.com/crackerli/Stakewars-III/blob/master/challenges/Challenge005.md
+Please refer to [step-by-step guide](https://github.com/crackerli/Stakewars-III/blob/master/challenges/Challenge005.md)
 
 ## Update log
 Updated 2022-09-04:Creation
