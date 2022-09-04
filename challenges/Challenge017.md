@@ -109,24 +109,6 @@ profiles:
         storage:
           size: 200Gi
 
-
-  placement:
-    akash:
-      pricing:
-        app:
-          denom: uakt
-          amount: 10000
-deployment:
-  app:
-      resources:
-        cpu:
-          units: 4.0
-        memory:
-          size: 6Gi
-        storage:
-          size: 200Gi
-
-
   placement:
     akash:
       pricing:
