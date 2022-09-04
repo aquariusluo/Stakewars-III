@@ -52,10 +52,92 @@ export AKASH_SIGN_MODE=amino-json
 echo $AKASH_NODE $AKASH_CHAIN_ID $AKASH_KEYRING_BACKEND
 ```
 
-Check Account Balance
+Check your Account Balance
 ```
 akash query bank balances --node $AKASH_NODE $AKASH_ACCOUNT_ADDRESS
 ````
+Create your Configuration for NEAR Docker named `near.yml`
+```
+---
+version: "2.0"
+
+services:
+  app:
+    image: ubuntu:20.04
+    #image: dimokus88/ubuntu:1.1
+    env:
+     - 'SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeTgebUqAGlcSN9P1CTEHuyvy5Ypn5d5kxJRcNDyj4fOMt3jzD080feH5z+rKm+JxDpOeXrhaOBCZzpjeake0UdalXVqBiv4Whiv1vJ89PdRrJlewUVdimN5mx3Fs/ULeD0f40CECkldmRBWZMSqybtKiatB7SOYLWSjzA9O22HgXl0oaqNOOtJIR3oDGqjQwChyGV+WsMOAMoGcNJAFupV8z42AcleCUMbr3kCKJc2cpmb4F8UKyerD0+crNcgjVimYDtqjDAlDItCH2+VlcLUAemb9eFOirySJAqL+fDr7Cme2+/3JfudD+/RcsBxGV5h4GEDELdoo74XrBH8Cvj root'
+     #- "my_root_password=#luo2020" 
+     #- "link_key="
+    command:
+      - "bash"
+      - "-c"
+    args:
+     # - 'curl -s https://raw.githubusercontent.com/Dimokus88/near/main/start.sh | bash '
+     - 'apt-get update;
+     apt-get install -y --no-install-recommends -- ssh;
+     mkdir -p -m0755 /run/sshd;
+     mkdir -m700 ~/.ssh;
+     echo "$SSH_PUBKEY" | tee ~/.ssh/authorized_keys;
+     chmod 0600 ~/.ssh/authorized_keys;
+     ls -lad ~ ~/.ssh ~/.ssh/authorized_keys;
+     md5sum ~/.ssh/authorized_keys;
+     exec /usr/sbin/sshd -D'
+    expose:
+      - port: 80
+        as: 80
+        to:
+          - global: true
+      - port: 22
+        as: 22
+        to:
+          - global: true
+      - port: 3030
+        as: 3030
+        to:
+          - global: true
+profiles:
+  compute:
+    app:
+      resources:
+        cpu:
+          units: 4.0
+        memory:
+          size: 6Gi
+        storage:
+          size: 200Gi
+
+
+  placement:
+    akash:
+      pricing:
+        app:
+          denom: uakt
+          amount: 10000
+deployment:
+  app:
+      resources:
+        cpu:
+          units: 4.0
+        memory:
+          size: 6Gi
+        storage:
+          size: 200Gi
+
+
+  placement:
+    akash:
+      pricing:
+        app:
+          denom: uakt
+          amount: 10000
+deployment:
+  app:
+    akash:
+      profile: app
+      count: 1  
+```
+
 
 ## Setup Environment for Near
 
