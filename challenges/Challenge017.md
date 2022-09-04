@@ -68,16 +68,12 @@ version: "2.0"
 services:
   app:
     image: ubuntu:20.04
-    #image: dimokus88/ubuntu:1.1
     env:
      - 'SSH_PUBKEY=ssh-rsa AAAAB3NzaC1*************** root'
-     #- "my_root_password=#luo2020" 
-     #- "link_key="
     command:
       - "bash"
       - "-c"
     args:
-     # - 'curl -s https://raw.githubusercontent.com/Dimokus88/near/main/start.sh | bash '
      - 'apt-get update;
      apt-get install -y --no-install-recommends -- ssh;
      mkdir -p -m0755 /run/sshd;
