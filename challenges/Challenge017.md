@@ -142,7 +142,7 @@ deployment:
     
 - Create your Deployment.    
 ```
-akash tx deployment create deploy.yml --from $AKASH_KEY_NAME 
+akash tx deployment create near.yml --from $AKASH_KEY_NAME 
 
 export AKASH_DSEQ=<CHANGETHIS>
 AKASH_OSEQ=1
