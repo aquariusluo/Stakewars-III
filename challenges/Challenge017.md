@@ -191,10 +191,17 @@ unset AKASH_DSEQ AKASH_OSEQ AKASH_GSEQ
 
 
 ## Setup Environment for Near
+- Install developer tools:
+```
+apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm curl tmux htop nano vim wget cargo 
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
 - Installing Node.js and npm      
 ```
 curl -sL https://deb.nodesource.com/setup_18.x | bash -  
-sudo apt install build-essential nodejs
+apt install build-essential nodejs
 PATH="$PATH"
 ```
 - Install NEAR-CLI
@@ -208,13 +215,7 @@ export NEAR_ENV=shardnet
 echo 'export NEAR_ENV=testnet' >> ~/.bashrc
 ```
 
-- Activate the node as validator.       
-Install developer tools:
-```
-apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm curl tmux htop nano vim wget cargo 
-
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
+### Activate the node as validator.       
 
 - Clone nearcore project from GitHub First, clone the nearcore repository .
 ```
