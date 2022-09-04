@@ -169,7 +169,7 @@ akash query market lease list --owner $AKASH_ACCOUNT_ADDRESS --node $AKASH_NODE 
 
 - Send the Manifest.     
 ```
-akash provider send-manifest deploy.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
+akash provider send-manifest near.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
 ```
 - Confirm the URL.    
 ```
@@ -178,8 +178,8 @@ akash provider lease-status --dseq $AKASH_DSEQ --from $AKASH_KEY_NAME --provider
 
 - Update the Deployment.      
 ```
-akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from $AKASH_KEY_NAME 
-akash provider send-manifest deploy.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
+akash tx deployment update near.yml --dseq $AKASH_DSEQ --from $AKASH_KEY_NAME 
+akash provider send-manifest near.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
 ```
 
 - Close Deployment.       
