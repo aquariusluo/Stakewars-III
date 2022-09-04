@@ -19,7 +19,7 @@ In this challenge, please try to create an account and deploy the chunk-only val
 
 ## Deploy Akash Docker
 ### Install Akash CLI
-Install Akash commands refer to the [guidebook] (https://docs.akash.network/guides/cli/detailed-steps/part-1.-install-akash).
+Install Akash commands refer to the [guidebook](https://docs.akash.network/guides/cli/detailed-steps/part-1.-install-akash).
 
 ### Create/Recover an Account
 ```
