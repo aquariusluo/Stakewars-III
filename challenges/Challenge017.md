@@ -1,8 +1,6 @@
-# Validator on Decentralized Cloud Service
+# Near Validator on Akash
 * Published on: 2022-08-16
 * Updated on: 2022-08-26
-* Submitted by: LiNEAR
-* Rewards: Rewards for testnet bounty + 100 USD in $LiNEAR for top 3 submissions
 
 ## Description:
 At this point we believe that all of you guys must have successfully deployed the chunk-only validator on one of the major cloud service providers like AWS.     
