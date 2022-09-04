@@ -60,7 +60,9 @@ Create your Configuration for NEAR Docker named `near.yml`. but firstly generate
 ```
 ssh-keygen -t rsa -f akash_docker_ssh_key -C root -b 2048
 ```
-near.yml:   
+ 
+<details>
+<summary>vi near.yml</summary>
 ```
 ---
 version: "2.0"
@@ -137,7 +139,7 @@ deployment:
       profile: app
       count: 1  
 ```
-
+</details>
 
 ## Setup Environment for Near
 
