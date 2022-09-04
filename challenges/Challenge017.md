@@ -139,10 +139,54 @@ deployment:
       count: 1 
 ```      
     
+Create your Deployment.    
+```
+akash tx deployment create deploy.yml --from $AKASH_KEY_NAME 
 
-           
+export AKASH_DSEQ=<CHANGETHIS>
+AKASH_OSEQ=1
+AKASH_GSEQ=1
 
+echo $AKASH_DSEQ $AKASH_OSEQ $AKASH_GSEQ
+```
 
+View your Bids.   
+```
+akash query market bid list --owner=$AKASH_ACCOUNT_ADDRESS --node $AKASH_NODE --dseq $AKASH_DSEQ --state=open
+
+export AKASH_PROVIDER=<akash***>
+echo $AKASH_PROVIDER
+```
+
+Create and confirm a Lease.     
+```
+akash tx market lease create --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
+
+akash query market lease list --owner $AKASH_ACCOUNT_ADDRESS --node $AKASH_NODE --dseq $AKASH_DSEQ
+> state: active
+```
+
+Send the Manifest.     
+```
+akash provider send-manifest deploy.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
+```
+Confirm the URL.    
+```
+akash provider lease-status --dseq $AKASH_DSEQ --from $AKASH_KEY_NAME --provider $AKASH_PROVIDER
+```
+
+Close Deployment.       
+```
+akash tx deployment close --from $AKASH_KEY_NAME
+
+unset AKASH_DSEQ AKASH_OSEQ AKASH_GSEQ
+```
+
+Update the Deployment.      
+```
+akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from $AKASH_KEY_NAME 
+akash provider send-manifest deploy.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
+```
 
 ## Setup Environment for Near
 
