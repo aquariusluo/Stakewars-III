@@ -39,6 +39,7 @@ echo $AKASH_ACCOUNT_ADDRESS
 ```
 
 ### Configure Akash Mainnet Network
+- Setup shell variables
 ```
 AKASH_NET="https://raw.githubusercontent.com/ovrclk/net/master/mainnet"
 AKASH_VERSION="$(curl -s "$AKASH_NET/version.txt")"
@@ -52,11 +53,11 @@ export AKASH_SIGN_MODE=amino-json
 echo $AKASH_NODE $AKASH_CHAIN_ID $AKASH_KEYRING_BACKEND
 ```
 
-Check your Account Balance
+- Check your Account Balance
 ```
 akash query bank balances --node $AKASH_NODE $AKASH_ACCOUNT_ADDRESS
 ````
-Create your Configuration for NEAR Docker named `near.yml`. but firstly generate a ssh key pair by following command:    
+- Create your Configuration for NEAR Docker named `near.yml`. but firstly generate a ssh key pair by following command:    
 ```
 ssh-keygen -t rsa -f akash_docker_ssh_key -C root -b 2048
 ```
@@ -139,7 +140,7 @@ deployment:
       count: 1 
 ```      
     
-Create your Deployment.    
+- Create your Deployment.    
 ```
 akash tx deployment create deploy.yml --from $AKASH_KEY_NAME 
 
@@ -150,7 +151,7 @@ AKASH_GSEQ=1
 echo $AKASH_DSEQ $AKASH_OSEQ $AKASH_GSEQ
 ```
 
-View your Bids.   
+- View your Bids.   
 ```
 akash query market bid list --owner=$AKASH_ACCOUNT_ADDRESS --node $AKASH_NODE --dseq $AKASH_DSEQ --state=open
 
@@ -158,7 +159,7 @@ export AKASH_PROVIDER=<akash***>
 echo $AKASH_PROVIDER
 ```
 
-Create and confirm a Lease.     
+- Create and confirm a Lease.     
 ```
 akash tx market lease create --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
 
@@ -166,27 +167,29 @@ akash query market lease list --owner $AKASH_ACCOUNT_ADDRESS --node $AKASH_NODE 
 > state: active
 ```
 
-Send the Manifest.     
+- Send the Manifest.     
 ```
 akash provider send-manifest deploy.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
 ```
-Confirm the URL.    
+- Confirm the URL.    
 ```
 akash provider lease-status --dseq $AKASH_DSEQ --from $AKASH_KEY_NAME --provider $AKASH_PROVIDER
 ```
 
-Close Deployment.       
+- Update the Deployment.      
+```
+akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from $AKASH_KEY_NAME 
+akash provider send-manifest deploy.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
+```
+
+- Close Deployment.       
 ```
 akash tx deployment close --from $AKASH_KEY_NAME
 
 unset AKASH_DSEQ AKASH_OSEQ AKASH_GSEQ
 ```
 
-Update the Deployment.      
-```
-akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from $AKASH_KEY_NAME 
-akash provider send-manifest deploy.yml --dseq $AKASH_DSEQ --provider $AKASH_PROVIDER --from $AKASH_KEY_NAME
-```
+
 
 ## Setup Environment for Near
 
