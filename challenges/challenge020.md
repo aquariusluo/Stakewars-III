@@ -7,6 +7,12 @@
 
 **Note:** Participants will not receive rewards for this challenge. The  idea of this challenge is to provide additional training/practice for participants and prepare for running a mainnet validator. 
 
+* [How to create telegram channel](#how-to-create-telegram-channel)
+* [How to create telegram bot](#how-to-create-telegram-bot)
+* [How to add a telegram bot to telegram channel](#how-to-add-a-telegram-bot-to-telegram-channel)
+* [How to create monitoring tool](#How-to-create-monitoring-tool)
+
+
 ## Challenge submission
 
 For submission, please fill out the [form](https://forms.gle/1MS9Jvhvq9YWbbwk7)
@@ -50,7 +56,7 @@ curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
 -d text="*Validator name* %0A\${METRIC1}\\%0A\${METRIC2}\\%0A\${METRIC3}\\"
 ```
 
-## How to Create Telegram Channel
+## How to create telegram channel
 
 - Click the **`menu`** button
 - Select `**New Channel**` button
@@ -60,7 +66,7 @@ curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
 - Enter a link name
 - Click **`SAVE`**
 
-## How to Create Telegram bot
+## How to create telegram bot
 
 - Start a new conversation with the [BotFather](https://telegram.me/botfather)
 - Send `/newbot` to create a new Telegram bot
@@ -71,7 +77,7 @@ curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
 **Helpful link:**
 [https://telegram.org/faq#q-how-do-i-create-a-bot](https://telegram.org/faq#q-how-do-i-create-a-bot)
 
-## How to Add a Telegram Bot to Telegram Channel
+## How to add a telegram bot to telegram channel
 
 - Open Channel menu
 - Choose `Manage Channel`
@@ -79,7 +85,7 @@ curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
 - Enter your bot's username and click `Add Administrator`
 - In the next step, disable all permissions except `Post messages` and click `**Save**`
 
-## Create monitoring shell tool
+## How to create monitoring tool
 
 
 **Helpful link:**
