@@ -86,7 +86,12 @@ curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \
 - In the next step, disable all permissions except `Post messages` and click `**Save**`
 
 ## How to create monitoring tool
-
+Refer to [telegram bot](https://github.com/aquariusluo/Stakewars-III/blob/main/challenges/telegram_monitor.sh)
+```bash
+sudo su
+chmod +x telegram_monitor.sh
+./telegram_monitor.sh
+```
 
 **Helpful link:**
 [https://telegram.org/faq#q-can-i-assign-administrators](https://telegram.org/faq#q-can-i-assign-administrators)
